@@ -1,0 +1,67 @@
+export const stffadata =[
+    {
+        "id": "sdjfh7384hfsjkd847fhj3487",
+        "name": "praveg",
+        "email": "praveg1@example.com",
+        "phone": "543-678-9012",
+        "password": "praveg21",
+        "roll": "staff",
+    },
+    {
+        "id": "gkjsdf8234kjhdfkj98hsd8f",
+        "name": "sunil",
+        "email": "sunil@example.com",
+        "phone": "654-789-0123",
+        "password": "sunil1221",
+        "roll": "staff",
+    },
+    {
+
+        "id": "fjkdshf92837fjdshfjsd83f7",
+        "name": "prachi",
+        "email": "david.brown@example.com",
+        "phone": "765-890-1234",
+        "password": "prachi322",
+        "roll": "staff",
+    },
+    {
+        "id": "dfgkh9283jhfd34fhgjhf8237",
+        "name": "Eva Davis",
+        "email": "eva.davis@example.com",
+        "phone": "876-901-2345",
+        "password": "evapassword",
+        "roll": "staff",
+    },
+    {
+        "id": "jdsf93jkhfdj92hfjgdsj8237",
+        "name": "Frank Miller",
+        "email": "frank.miller@example.com",
+        "phone": "987-012-3456",
+        "password": "frank2025",
+        "roll": "staff",
+    },
+    {
+        "id": "sdjkhf923jdhfhg783fjshf8",
+        "name": "Grace Lee",
+        "email": "grace.lee@example.com",
+        "phone": "654-321-0987",
+        "password": "gracepass",
+        "roll": "staff",
+    },
+    {
+        "id": "fhjkd92fjkhf9237fhkjsfh92",
+        "name": "Henry Walker",
+        "email": "henry.walker@example.com",
+        "phone": "123-987-6540",
+        "password": "henry1234",
+        "roll": "staff",
+    },
+    {
+        "id": "dsjfh92fhjd93fjdsf28hfds",
+        "name": "Isabel Clark",
+        "email": "isabel.clark@example.com",
+        "phone": "231-543-8765",
+        "password": "isabel2025",
+        "roll": "staff",
+    }
+]

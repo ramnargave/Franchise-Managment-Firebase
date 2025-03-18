@@ -91,7 +91,7 @@ const CartPage = () => {
           console.log(item)
           const franchiseRef = doc(db, "franchise", item.franchiseId);
           const franchiseSnap = await getDoc(franchiseRef);
-  
+          
           if (franchiseSnap.exists()) {
             const franchiseData = franchiseSnap.data();
             const updatedTotalSell = (franchiseData.totalorder || 0) + item.quantity;

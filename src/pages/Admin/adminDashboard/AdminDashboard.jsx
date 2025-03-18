@@ -10,6 +10,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { auth, db } from "../../../firebase/FirebaseConfig";
 import OrderAnalytics from "../components/OrderAnalytics";
 import Graph from "../components/AdminCompo/Graph";
+import TotalFrnachise from "../components/AdminCompo/TotalFrnachise";
 
 
 const menuItemsAdmin = [
@@ -93,7 +94,7 @@ export default function AdminPanel() {
 
             {activeTab === "staff" && <div>Manage Staff</div>}
 
-            {activeTab === "franchises" && <div>Franchise Management</div>}
+            {activeTab === "franchises" && <div><TotalFrnachise/></div>}
 
              {/* create subadmin  */}
             {activeTab === "create_subadmin" && loginhai?.roll === "admin" && <SubAdminCreateForm />}

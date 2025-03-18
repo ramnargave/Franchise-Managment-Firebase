@@ -87,6 +87,7 @@ function Menu() {
             image: dis.image,
             price: dis.finalprice,
             id: dis.id,
+            franchiseId: dis.franchiseId,
             owneruid: dis.owneruid,
             quantity: 1,
             addedAt: Date.now(), // Timestamp added for auto-delete

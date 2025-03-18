@@ -22,7 +22,7 @@ function Create_Franchise() {
   const[imageurl, setImageUrl] = useState("")
   const[description, setDescription] = useState("")
   const[revenue] = useState(0)
-  const[totalsell] = useState(0)
+  const[totalorder] = useState(0)
   const[staff] = useState([])
   const[menu] = useState([])
   const [feedback] = useState([])
@@ -76,7 +76,7 @@ function Create_Franchise() {
         twitter,
         facebook,
         revenue,
-        totalsell,
+        totalorder,
         staff,
         menu,
         ownername: loggedUser[0].name,

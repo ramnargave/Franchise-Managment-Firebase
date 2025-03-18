@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import BackHeader from '../../../components/BackHeader/BackHeader';
 import myContext from '../../../context/data/myContext';
 import CartLoader from '../../../components/loadingComponents/CartLoader';
-import { doc, getDoc, updateDoc, addDoc, collection } from 'firebase/firestore';
+import { doc, getDoc, updateDoc, addDoc, collection, } from 'firebase/firestore';
 import { db } from '../../../firebase/FirebaseConfig';
 import { Link } from 'react-router-dom';
 
@@ -65,13 +65,14 @@ const CartPage = () => {
   // Buy Now function
   const handleBuyNow = async () => {
     if (!loggedUserId || cartItems.length === 0) return;
-
+  
     try {
       const userRef = doc(db, "users", loggedUserId);
       const userSnap = await getDoc(userRef);
-
+  
       if (userSnap.exists()) {
         const userData = userSnap.data();
+  
         const orderData = {
           userId: loggedUserId,
           userName: userData.name,
@@ -81,19 +82,46 @@ const CartPage = () => {
           orderDate: new Date().toISOString(),
           status: "Pending",
         };
-          // 🔥 Firestore में "buy" कलेक्शन में ऑर्डर सेव करो
+  
+        // 🔥 Firestore में "buy" कलेक्शन में ऑर्डर सेव करो
         await addDoc(collection(db, "buy"), orderData);
+  
+        // 🔥 फ्रैंचाइज़ के टोटल सेल्स अपडेट करें
+        for (const item of cartItems) {
+          console.log(item)
+          const franchiseRef = doc(db, "franchise", item.franchiseId);
+          const franchiseSnap = await getDoc(franchiseRef);
+  
+          if (franchiseSnap.exists()) {
+            const franchiseData = franchiseSnap.data();
+            const updatedTotalSell = (franchiseData.totalorder || 0) + item.quantity;
+            await updateDoc(franchiseRef, { totalorder: updatedTotalSell });
+  
+            // 🔥 फ्रैंचाइज़ के Menu में जाकर फूड की `totalsell` अपडेट करें
+           // 🔥 Menu के अंदर जाकर सही Food ID को अपडेट करें
+          const updatedMenu = franchiseData.menu.map((foodItem) => {
+            if (foodItem.id === item.id) {
+              return { ...foodItem, totalorder: (foodItem.totalorder || 0) + item.quantity };
+            }
+            return foodItem;
+          });
 
-          // ✅ Optional: Order प्लेस होने के बाद Cart Empty कर सकते हो
+          // 🔥 Firestore में अपडेट करें
+          await updateDoc(franchiseRef, { menu: updatedMenu });
+
+          }
+        }
+  
+        alert("✅ Order Placed Successfully!");
+      // ✅ Optional: Order प्लेस होने के बाद Cart Empty कर सकते हो
         await updateDoc(userRef, { cart: [] });
         setCartItems([]);
-
-        alert("✅ Order Placed Successfully!");
       }
     } catch (error) {
       console.error("Error placing order:", error);
     }
   };
+  
 
   if (!loggedUserId) {
     return <CartLoader />;

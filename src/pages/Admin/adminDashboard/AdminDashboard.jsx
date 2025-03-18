@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Home, Store, ClipboardList, Users, Settings, UserPlus, DiamondPlus, UtensilsCrossed } from "lucide-react";
+import { Home, Store, ClipboardList, Users, Settings, UserPlus, DiamondPlus, UtensilsCrossed, ChartColumnDecreasing  } from "lucide-react";
 import myContext from "../../../context/data/myContext";
 import AddCategories from "../components/AddCategories";
 import SubAdminCreateForm from "../components/SubAdminCreateForm";
@@ -8,6 +8,9 @@ import LoadingComponents from "../../../components/loadingComponents/LoadingComp
 import AddDhises from "../components/AddDhises";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { auth, db } from "../../../firebase/FirebaseConfig";
+import OrderAnalytics from "../components/OrderAnalytics";
+import Graph from "../components/AdminCompo/Graph";
+
 
 const menuItemsAdmin = [
   { name: "Dashboard", icon: <Home />, id: "dashboard" },
@@ -17,6 +20,7 @@ const menuItemsAdmin = [
   { name: "Create Sub-Admin", icon: <UserPlus />, id: "create_subadmin" },
   { name: "Settings", icon: <Settings />, id: "settings" },
   { name: "Create Categories", icon: <DiamondPlus />, id: "Create_Categories" },
+  { name: "Graph", icon: <ChartColumnDecreasing />, id: "Graph" },
 ];
 
 const menuItemsSubAdmin = [
@@ -26,6 +30,7 @@ const menuItemsSubAdmin = [
   { name: "Add Dhises", icon: <UtensilsCrossed />, id: "add_dhises"},
   { name: "My Orders", icon: <ClipboardList />, id: "orders" },
   { name: "Manage Staff", icon: <Users />, id: "staff" },
+  {name: "Analytics", icon: <ChartColumnDecreasing />, id: "Analytics" },
 ];
 
 export default function AdminPanel() {
@@ -115,6 +120,11 @@ export default function AdminPanel() {
             
             {/* setting  */}
             {activeTab === "settings" && loginhai?.roll === 'admin' && <div>Settings</div>}
+           
+            {/* graph  */}
+            {activeTab === "Graph" && <div><Graph/></div>}
+
+            {activeTab === "Analytics" && <div><OrderAnalytics/></div>}
 
             {/* addCategories  */}
             {activeTab === "Create_Categories" && loginhai?.roll === 'admin' && <AddCategories />}

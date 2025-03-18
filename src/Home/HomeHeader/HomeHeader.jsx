@@ -25,7 +25,7 @@ function HomeHeader() {
         {loggedUser ?  <div className='flex items-center gap-5' ><Link to={`/yourprofile/${loggedUser[0].id}`} className="">
             <div><AccountCircleIcon/></div>
         </Link>
-        <Link to={`/yourcart/${loggedUser[0].id}`}><ShoppingCartIcon/></Link></div> : <div className="flex items-center gap-2 bg-red-700 p-3 rounded-3xl text-white" >
+        <Link to={`/yourcart`}><ShoppingCartIcon/></Link></div> : <div className="flex items-center gap-2 bg-red-700 p-3 rounded-3xl text-white" >
             <div><AccountCircleIcon/></div>
             <div className='font-semibold'  onClick={() => setIsOpen(true)} >SigIn/Login</div>
         </div>}

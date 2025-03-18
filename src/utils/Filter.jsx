@@ -11,7 +11,7 @@ export const filterFoods = (food, filterFood, searchQuery) => {
       // Price Range Filter
       if (filterFood.price) {
         if (filterFood.price === '150' && food.finalprice > 150) match = false;
-        if (filterFood.price === 'Below_200' && food.finalprice < 200) match = false;
+        if (filterFood.price === 'Below_200' && food.finalprice > 200) match = false;
         if (filterFood.price === '300' && food.finalprice < 300) match = false;
       }
 

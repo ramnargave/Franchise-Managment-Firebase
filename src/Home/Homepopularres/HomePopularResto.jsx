@@ -15,7 +15,7 @@ function HomePopularResto() {
          {franchise.map((f) => {
             return(
                 <Link to={`/restuarnatsdetail/${f.owneruid}`} key={f.id} className="min-w-32 md:min-w-52" >
-                  <div className="w-full h-28 md:h-40 lg:h-44 rounded-lg bg-gray-100" >
+                  <div className="w-full h-28 md:h-40 lg:h-44 rounded-lg bg-gray-100">
                     <img src={f.imageurl} alt="" className="w-full h-full rounded-lg" />
                   </div>
                   <div>

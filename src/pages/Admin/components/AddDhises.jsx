@@ -88,6 +88,7 @@ function AddDishes({ franchiseId }) {
           cuisine,
           OccasionCategories,
           owneruid: loggedUser[0].uid,
+          franchiseId,
         }),
       });
 

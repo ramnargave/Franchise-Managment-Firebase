@@ -1,7 +1,10 @@
 import StarIcon from "@mui/icons-material/Star";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const FoodCard = ({dis, setPop}) => {
+const FoodCard = ({dis, setPop, addtocart }) => {
+
+
   return (
     <>
                     <div className="hover:scale-95 transition-all duration-300 " >
@@ -17,7 +20,7 @@ const FoodCard = ({dis, setPop}) => {
                             <div className="text-lg text-gray-800" >{dis.description}</div>
                             <div className="flex items-center justify-between" >
                               <div className="text-lg font-bold text-gray-800 " >₹ {dis.finalprice}</div>
-                              <div onClick={((e) => setPop(true))} className="bg-red-600 p-1 rounded-lg font-bold " >Add Cart</div>
+                              <div onClick={() => addtocart(dis)} className="bg-red-600 p-1 rounded-lg font-bold " >Add Cart</div>
                             </div>
                         </div>
                 </div>

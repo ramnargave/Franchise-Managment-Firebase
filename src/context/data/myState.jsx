@@ -13,6 +13,7 @@ function myState(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [location,] = useState("")
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
   const [loading, setLoading] = useState(false);
@@ -38,6 +39,7 @@ function myState(props) {
         name,
         email,
         password,
+        location,
         cart: 0,
         phonenumber: "",
         roll: "user",

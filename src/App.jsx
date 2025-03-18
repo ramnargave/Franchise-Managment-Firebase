@@ -8,6 +8,7 @@ import Menu from './pages/User/menuPage/Menu'
 import RestuarntsDetail from "./pages/User/restuarntsDetail/RestuarntsDetail";
 import OrderTracking from "./pages/User/OrderTracking/OrderTracking";
 import AdminPanel from "./pages/Admin/adminDashboard/AdminDashboard";
+import OrderAnalytics from "./pages/Admin/adminDashboard/OrderAnalytics";
 
 
 
@@ -20,11 +21,12 @@ const App = () => {
          <Route path="/" element={<Home/>} />
          <Route path="/*" element={<NotFound/>}/>
          <Route path="/yourprofile/:id" element={<UserProfile/>}/>
-         <Route path="/yourcart/:id" element={<CartPage/>}/>
+         <Route path="/yourcart" element={<CartPage/>}/>
          <Route path="/menu" element={<Menu/>}/>
          <Route path='/restuarnatsdetail/:id' element={<RestuarntsDetail/>}/>
          <Route path="/ordertracking" element={<OrderTracking/>}/>
          <Route path='/adminpanel' element={<AdminPanel/>}/>
+         <Route path="/view" element={<OrderAnalytics/>}/>
        </Routes>
      </Router>
     </MyState>

@@ -7,10 +7,11 @@ import Create_Franchise from "../components/Create_Franchise";
 import LoadingComponents from "../../../components/loadingComponents/LoadingComponents";
 import AddDhises from "../components/AddDhises";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { auth, db } from "../../../firebase/FirebaseConfig";
+import { db } from "../../../firebase/FirebaseConfig";
 import OrderAnalytics from "../components/OrderAnalytics";
 import Graph from "../components/AdminCompo/Graph";
 import TotalFrnachise from "../components/AdminCompo/TotalFrnachise";
+import FranchiseDetails from "../components/AdminCompo/FranchiseDetails";
 
 
 const menuItemsAdmin = [
@@ -102,9 +103,7 @@ export default function AdminPanel() {
             {/* create franchise  */}
             {activeTab === "create_franchise" && loginhai?.roll === 'sub-admin' && (
               hasFranchise ? (
-                <div className="w-full h-screen flex items-center justify-center text-gray-400 font-extrabold text-3xl">
-                  Franchise already exists, you can update it here.
-                </div>
+                <div><FranchiseDetails/></div>
               ) : <Create_Franchise />
             )}
        

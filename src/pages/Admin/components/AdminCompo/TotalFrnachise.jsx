@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs, query, updateDoc, where, } from "firebase/firestore";
 import { saveAs } from "file-saver";
 import { db } from "../../../../firebase/FirebaseConfig";
 
@@ -81,6 +81,35 @@ const AdminFranchiseCardView = () => {
     saveAs(encodedUri, "franchises.csv");
   };
 
+
+//   deletefunction 
+  const handledelte = async (franchise) => {
+     const qg = doc(db, 'franchise', franchise.id);
+try {
+    await deleteDoc(qg)
+     alert('Franchise deleted successfully');
+           const usersRef = collection(db, "users");
+           const q = query(usersRef, where("uid", "==", franchise.owneruid));
+           const querySnapshot = await getDocs(q);
+       
+           if (!querySnapshot.empty) {
+             const userDoc = querySnapshot.docs[0].ref;
+             const userData = querySnapshot.docs[0].data();
+     
+       
+             // yaha users me jo franchise data hai use update kara rahe hai
+             await updateDoc(userDoc, {
+               franchise: (userData.franchise || 0) - 1
+             });
+           } else {
+             console.error("Error: User document does not exist in Firestore.");
+             alert("Error: User document not found in Firebase.");
+           }
+  } catch (error){
+    alert("Failed to delete")
+  }
+}
+
   return (
     <div className={`${darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-900"} min-h-screen p-6`}>
       <h1 className="text-3xl font-bold text-center mb-6">🏢 Franchise Management</h1>
@@ -156,7 +185,19 @@ const AdminFranchiseCardView = () => {
               <div className="p-5">
                 <h2 className="text-lg font-semibold">{franchise.name || "N/A"}</h2>
                 <p>📍 {franchise.location || "N/A"}</p>
-                <p className="mt-1">💰 Sales: ₹{franchise.totalorder || 0}</p>
+                              {/* ⚡️ CTA Buttons */}
+              <div className="mt-4 flex justify-between items-center">
+                <button className="bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600 transition">
+                  🔍 View
+                </button>
+                <button className="bg-green-500 text-white px-2 py-1 rounded text-sm hover:bg-green-600 transition">
+                  ✏️ Edit
+                </button>
+                <button onClick={() => handledelte(franchise)} className="bg-red-500 text-white px-2 py-1 rounded text-sm hover:bg-red-600 transition">
+                  ❌ Delete
+                </button>
+              </div>
+                <p className="mt-1 font-semibold py-1">📈 TotalOrder: {franchise.totalorder || 0}</p>
                 <div className="bg-gray-300 h-2 mt-2 rounded">
                   <div className="bg-green-500 h-2 rounded" style={{ width: `${franchise.totalorder / 1000}%` }}></div>
                 </div>

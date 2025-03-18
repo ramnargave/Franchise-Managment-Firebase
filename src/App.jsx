@@ -8,6 +8,7 @@ import Menu from './pages/User/menuPage/Menu'
 import RestuarntsDetail from "./pages/User/restuarntsDetail/RestuarntsDetail";
 import OrderTracking from "./pages/User/OrderTracking/OrderTracking";
 import AdminPanel from "./pages/Admin/adminDashboard/AdminDashboard";
+import FranchiseDetails from "./pages/Admin/components/AdminCompo/FranchiseDetails";
 
 
 
@@ -26,6 +27,7 @@ const App = () => {
          <Route path='/restuarnatsdetail/:id' element={<RestuarntsDetail/>}/>
          <Route path="/ordertracking" element={<OrderTracking/>}/>
          <Route path='/adminpanel' element={<AdminPanel/>}/>
+         <Route path="fran" element={<FranchiseDetails/>}/>
        </Routes>
      </Router>
     </MyState>

@@ -10,7 +10,7 @@ import myContext from "../../context/data/myContext";
 function LoginSignup() {
 
   const context  = useContext(myContext);
-  const {isOpen, setIsOpen, isLogin, setIsLogin, name, setName, email, setEmail, password, setPassword, errorMsg, successMsg, loading,  handleSignup, handleLogin, loggedUser, getCurrentUser} = context;
+  const {isOpen, setIsOpen, isLogin, setIsLogin, name, setName, email, setEmail, password, setPassword, location, setLocation, errorMsg, successMsg, loading,  handleSignup, handleLogin, loggedUser, getCurrentUser} = context;
 
 
   
@@ -31,13 +31,22 @@ function LoginSignup() {
           {errorMsg && <div className="w-full text-red-600 text-center">{errorMsg}</div>}
 
           {!isLogin && (
-            <input
+            <>
+                        <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Full Name"
               className="w-full p-2 border rounded"
             />
+            <input
+              type="text"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              placeholder="Full Location"
+              className="w-full p-2 border rounded"
+            />
+            </>
           )}
           <input
             type="email"

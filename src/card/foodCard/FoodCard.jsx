@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const FoodCard = ({dis, setPop, addtocart }) => {
 
 
+
   return (
     <>
                     <div className="hover:scale-95 transition-all duration-300 " >

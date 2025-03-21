@@ -21,6 +21,7 @@ function Menu() {
 
     const context = useContext(myContext)
     const { food, loading, loggedUser} = context
+    // console.log(food)
 
     // add to cart 
     const [cart, setCart] = useState([]);
@@ -31,14 +32,14 @@ function Menu() {
         // Cart खाली है, तो जो भी food add कर रहे हैं, उसी की franchise set कर दो
         setCart([food]);
         setCartFranchise(food.owneruid);
-        console.log(cart)
-        console.log(cartFranchise)
+        // console.log(cart)
+        // console.log(cartFranchise)
       } else {
         // अगर Cart में पहले से item है, तो चेक करें कि franchise वही है या नहीं
         if (cartFranchise === food.owneruid) {
           setCart([...cart, food]); 
-          console.log(cart)
-          console.log(cartFranchise) // Add to cart
+          // console.log(cart)
+          // console.log(cartFranchise) 
         } else {
           alert(`You can only add items from "${cartFranchise}". Please clear your cart first.`);
         }
@@ -85,6 +86,7 @@ function Menu() {
           cart: arrayUnion({
             name: dis.name,
             image: dis.image,
+            franchiseName: dis.franchiseName,
             price: dis.finalprice,
             id: dis.id,
             franchiseId: dis.franchiseId,
@@ -94,7 +96,8 @@ function Menu() {
           }),
         });
     
-        console.log("Item added to cart successfully!");
+        // console.log("Item added to cart successfully!");
+        alert("Item added to cart successfully!");
     
         // **Schedule Auto-Delete**
         setTimeout(async () => {

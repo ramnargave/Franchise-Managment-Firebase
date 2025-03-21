@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Home, Store, ClipboardList, Users, Settings, UserPlus, DiamondPlus, UtensilsCrossed, ChartColumnDecreasing  } from "lucide-react";
+import { Home, Store, ClipboardList, Users, Settings, UserPlus, DiamondPlus, UtensilsCrossed, Utensils } from "lucide-react";
 import myContext from "../../../context/data/myContext";
 import AddCategories from "../components/AddCategories";
 import SubAdminCreateForm from "../components/SubAdminCreateForm";
@@ -12,37 +12,51 @@ import OrderAnalytics from "../components/OrderAnalytics";
 import Graph from "../components/AdminCompo/Graph";
 import TotalFrnachise from "../components/AdminCompo/TotalFrnachise";
 import FranchiseDetails from "../components/AdminCompo/FranchiseDetails";
+import AdminFoodList from "../components/AdminCompo/AdminAllFood";
+import SubAdminFoodList from "../components/SubAdminCompo/SubAdminAllFood";
+import AdminOrders from "../components/AdminCompo/AdminOrder";
+import SubAdminOrders from "../components/SubAdminCompo/SubAdminOrder";
 
 
 const menuItemsAdmin = [
-  { name: "Dashboard", icon: <Home />, id: "dashboard" },
+  { name: "Dashboard", icon: <Home />, id: "admindashboard" },
   { name: "Franchises", icon: <Store />, id: "franchises" },
+  { name: "Total Food", icon: <Utensils />, id:"total_food" },
   { name: "Order Management", icon: <ClipboardList />, id: "orders" },
   { name: "Staff Management", icon: <Users />, id: "staff" },
   { name: "Create Sub-Admin", icon: <UserPlus />, id: "create_subadmin" },
   { name: "Settings", icon: <Settings />, id: "settings" },
   { name: "Create Categories", icon: <DiamondPlus />, id: "Create_Categories" },
-  { name: "Graph", icon: <ChartColumnDecreasing />, id: "Graph" },
 ];
 
 const menuItemsSubAdmin = [
-  { name: "Dashboard", icon: <Home />, id: "dashboard" },
-  { name: "Franchises", icon: <Store />, id: "franchises" },
+  { name: "Dashboard", icon: <Home />, id: "subadminashboard" },
   { name: "Create Franchise", icon: <UserPlus />, id: "create_franchise"},
+  { name: "Total Food", icon: <Utensils />, id:"total_foodd" },
   { name: "Add Dhises", icon: <UtensilsCrossed />, id: "add_dhises"},
-  { name: "My Orders", icon: <ClipboardList />, id: "orders" },
+  { name: "My Orders", icon: <ClipboardList />, id: "myorders" },
   { name: "Manage Staff", icon: <Users />, id: "staff" },
-  {name: "Analytics", icon: <ChartColumnDecreasing />, id: "Analytics" },
 ];
 
 export default function AdminPanel() {
-  const [activeTab, setActiveTab] = useState("dashboard");
+  const [activeTab, setActiveTab] = useState("admindashboard");
   const [franchiseData, setFranchiseData] = useState([]);
 
   const context = useContext(myContext);
   const { loggedUser } = context;
 
   const loginhai = loggedUser && loggedUser[0] ? loggedUser[0] : null;
+
+  const admin = loggedUser && loggedUser[0]?.roll === "admin";
+
+ useEffect(() => {
+  if(!admin){
+    setActiveTab("subadminashboard")
+  }else{
+    setActiveTab("admindashboard")
+  }
+ }, [admin])
+ 
 
 
   // is function se hame franchise ki id bheje ge adddhise components me 
@@ -89,9 +103,16 @@ export default function AdminPanel() {
           {/* Main Content */}
           <main className="flex-1 p-6 bg-gray-100 overflow-auto">
 
-            {activeTab === "dashboard" && <div>Dashboard Content</div>}
+            {activeTab === "admindashboard" && admin && <Graph/>}
+            {activeTab === "subadminashboard" && <OrderAnalytics/>}
 
-            {activeTab === "orders" && <div>Order Management</div>}
+            {activeTab === "total_food" && <AdminFoodList/>}
+
+            {activeTab === "total_foodd" && <SubAdminFoodList/>}
+
+            {activeTab === "orders" && <AdminOrders/>}
+
+            {activeTab === "myorders" && <SubAdminOrders/>}
 
             {activeTab === "staff" && <div>Manage Staff</div>}
 
@@ -121,10 +142,6 @@ export default function AdminPanel() {
             {/* setting  */}
             {activeTab === "settings" && loginhai?.roll === 'admin' && <div>Settings</div>}
            
-            {/* graph  */}
-            {activeTab === "Graph" && <div><Graph/></div>}
-
-            {activeTab === "Analytics" && <div><OrderAnalytics/></div>}
 
             {/* addCategories  */}
             {activeTab === "Create_Categories" && loginhai?.roll === 'admin' && <AddCategories />}

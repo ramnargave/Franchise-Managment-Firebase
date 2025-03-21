@@ -12,6 +12,7 @@ const CartPage = () => {
 
   const [cartItems, setCartItems] = useState([]);
   const loggedUserId = loggedUser?.[0]?.id;
+  const loggeduserlocation = loggedUser[0]?.location;
 
   useEffect(() => {
     if (!loggedUserId) return;
@@ -77,6 +78,7 @@ const CartPage = () => {
           userId: loggedUserId,
           userName: userData.name,
           userEmail: userData.email,
+          userlocation: loggeduserlocation,
           orderItems: cartItems,
           totalAmount: cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0) + 5 + 2,
           orderDate: new Date().toISOString(),
@@ -149,14 +151,14 @@ const CartPage = () => {
                   <img src={item.image} alt={item.name} className="w-16 h-16 rounded-lg mr-4 object-cover" />
                   <div>
                     <h2 className="text-lg font-semibold">{item.name}</h2>
-                    <p className="text-gray-600">${item.price.toFixed(2)}</p>
+                    <p className="text-gray-600">₹{item.price}</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-4">
                   <button onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))} className="px-2 py-1 bg-gray-200 rounded">-</button>
                   <p className="text-lg font-semibold">{item.quantity}</p>
                   <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="px-2 py-1 bg-gray-200 rounded">+</button>
-                  <p className="text-lg font-semibold">${(item.price * item.quantity).toFixed(2)}</p>
+                  <p className="text-lg font-semibold">₹{(item.price * item.quantity).toFixed(2)}</p>
                   <button
                   onClick={() => handleDeleteItem(item.id)}
                   className="text-red-500 hover:text-red-700 transition duration-300"
@@ -185,20 +187,20 @@ const CartPage = () => {
             <div className="space-y-4">
               <div className="flex justify-between">
                 <span>Subtotal</span>
-                <span>${cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2)}</span>
+                <span>₹{cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
                 <span>Shipping</span>
-                <span>$5.00</span>
+                <span>₹5.00</span>
               </div>
               <div className="flex justify-between">
                 <span>Tax</span>
-                <span>$2.00</span>
+                <span>₹2.00</span>
               </div>
               <div className="border-t pt-4">
                 <div className="flex justify-between font-bold">
                   <span>Total</span>
-                  <span>${(cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0) + 5 + 2).toFixed(2)}</span>
+                  <span>₹{(cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0) + 5 + 2).toFixed(2)}</span>
                 </div>
               </div>
               <button onClick={handleBuyNow} className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition duration-300">

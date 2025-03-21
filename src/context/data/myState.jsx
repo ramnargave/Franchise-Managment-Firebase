@@ -13,7 +13,7 @@ function myState(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [location,] = useState("")
+  const [location, setLocation] = useState("")
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
   const [loading, setLoading] = useState(false);
@@ -96,6 +96,7 @@ function myState(props) {
       setSuccessMsg("Login successful!");
       setEmail("");
       setPassword("");
+      setLocation("");
   
       setTimeout(() => {
         setSuccessMsg("");
@@ -192,7 +193,7 @@ function myState(props) {
 
 
   return (
-    <MyContext.Provider value={{isOpen, setIsOpen, isLogin, setIsLogin, name, setName, email, setEmail, password, setPassword, errorMsg, setErrorMsg, successMsg, setSuccessMsg, loading, setLoading, handleSignup, handleLogin, loggedUser, getCurrentUser, homeloading, setHomeLoading, franchise, setFranchise, food, setFood,}} >
+    <MyContext.Provider value={{isOpen, setIsOpen, isLogin, setIsLogin, name, setName, email, setEmail, password, setPassword, location, setLocation, errorMsg, setErrorMsg, successMsg, setSuccessMsg, loading, setLoading, handleSignup, handleLogin, loggedUser, getCurrentUser, homeloading, setHomeLoading, franchise, setFranchise, food, setFood,}} >
         {props.children}
     </MyContext.Provider>
   )

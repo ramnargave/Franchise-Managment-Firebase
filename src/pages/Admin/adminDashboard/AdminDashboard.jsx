@@ -67,7 +67,6 @@ export default function AdminPanel() {
         const data = await getDocs(q);
         setFranchiseData(data.docs.map(doc => ({ id: doc.id, ...doc.data() })));
       };
-
       getUser();
     }
   }, [loginhai?.uid]);

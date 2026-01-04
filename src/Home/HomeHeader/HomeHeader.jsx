@@ -43,10 +43,13 @@ function HomeHeader() {
                         )}
                     </div>
                 ) : (
-                    <div className="flex items-center gap-2 bg-red-700 p-3 rounded-3xl text-white">
+                   <div className='flex items-center gap-5'>
+                    <Link to='/passwordshow' className='bg-blue-600 p-3 rounded-lg font-sans font-semibold text-white' >Get Password</Link>
+                     <div className="flex items-center gap-2 bg-red-700 p-3 rounded-3xl text-white">
                         <div><AccountCircleIcon /></div>
                         <div className='font-semibold' onClick={() => setIsOpen(true)}>SigIn/Login</div>
                     </div>
+                   </div>
                 )}
             </div>
 
